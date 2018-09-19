@@ -31,14 +31,14 @@ public class CollegueCtrl {
 		return ResponseEntity.ok(this.collegueService.listerCollegues());
 	}
 
-	@GetMapping("/{nom}")
-	public ResponseEntity<Optional<Collegue>> findSpecific(@PathVariable String nom) {
-		return ResponseEntity.ok(this.collegueService.findWithName(nom));
+	@GetMapping("/{pseudo}")
+	public ResponseEntity<Optional<Collegue>> findSpecific(@PathVariable String pseudo) {
+		return ResponseEntity.ok(this.collegueService.findWithPseudo(pseudo));
 	}
 
-	@PatchMapping("/{nom}")
-	public ResponseEntity<Collegue> patch(@PathVariable String nom, @RequestBody String avis) {
-		Collegue collegueModifie = this.collegueService.modifierScore(nom, avis);
+	@PatchMapping("/{pseudo}")
+	public ResponseEntity<Collegue> patch(@PathVariable String pseudo, @RequestBody String avis) {
+		Collegue collegueModifie = this.collegueService.modifierScore(pseudo, avis);
 		return ResponseEntity.ok(collegueModifie);
 	}
 

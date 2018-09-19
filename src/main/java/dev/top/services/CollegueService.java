@@ -37,8 +37,8 @@ public class CollegueService {
 	 * @param nom
 	 * @return
 	 */
-	public Optional<Collegue> findWithName(String nom) {
-		return this.collegueRepo.findByNom(nom);
+	public Optional<Collegue> findWithPseudo(String pseudo) {
+		return this.collegueRepo.findByPseudo(pseudo);
 	}
 
 	/**
@@ -49,9 +49,10 @@ public class CollegueService {
 	 * @throws ServiceException
 	 * @throws PseudoInvalideException
 	 */
-	public Collegue modifierScore(String nom, String avisUtilisateur) throws ServiceException, PseudoInvalideException {
+	public Collegue modifierScore(String pseudo, String avisUtilisateur)
+			throws ServiceException, PseudoInvalideException {
 
-		return this.collegueRepo.findByNom(nom).map(collegueTrouve -> {
+		return this.collegueRepo.findByPseudo(pseudo).map(collegueTrouve -> {
 
 			if (avisUtilisateur.contains("AIMER")) {
 				collegueTrouve.setScore(collegueTrouve.getScore() + 10);

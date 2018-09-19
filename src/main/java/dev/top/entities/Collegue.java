@@ -14,7 +14,11 @@ public class Collegue {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonIgnore
 	private Integer id;
+	private String pseudo;
 	private String nom;
+	private String prenom;
+	private String email;
+	private String adresse;
 	private Integer score;
 	private String photoUrl;
 
@@ -22,9 +26,13 @@ public class Collegue {
 		super();
 	}
 
-	public Collegue(String nom, Integer score, String photoUrl) {
+	public Collegue(String pseudo, String nom, String prenom, String adresse, Integer score, String photoUrl) {
 		super();
+		this.pseudo = pseudo;
 		this.nom = nom;
+		this.prenom = prenom;
+		this.email = nom + "." + prenom + "@gmail.com";
+		this.adresse = adresse;
 		this.score = score;
 		this.photoUrl = photoUrl;
 	}
@@ -59,6 +67,38 @@ public class Collegue {
 
 	public void setPhotoUrl(String photoUrl) {
 		this.photoUrl = photoUrl;
+	}
+
+	public String getPrenom() {
+		return prenom;
+	}
+
+	public void setPrenom(String prenom) {
+		this.prenom = prenom;
+	}
+
+	public String getPseudo() {
+		return pseudo;
+	}
+
+	public void setPseudo(String pseudo) {
+		this.pseudo = pseudo;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getAdresse() {
+		return adresse;
+	}
+
+	public void setAdresse(String adresse) {
+		this.adresse = adresse;
 	}
 
 }
