@@ -18,8 +18,8 @@ public class StartupDataInit {
 	public void init() {
 
 		if (this.collegueRepo.count() <= 0) {
-			this.collegueRepo.save(new Collegue("Rod", 100,
-					"https://images.pexels.com/photos/265036/pexels-photo-265036.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb"));
+			this.collegueRepo.save(new Collegue("Bob", 100,
+					"https://vignette.wikia.nocookie.net/minions/images/0/04/Bob.jpg/revision/latest?cb=20150820153153&path-prefix=fr"));
 			this.collegueRepo.save(new Collegue("Alice", 800,
 					"https://images.pexels.com/photos/265036/pexels-photo-265036.jpeg?w=1260&h=750&auto=compress&cs=tinysrgb"));
 		}
