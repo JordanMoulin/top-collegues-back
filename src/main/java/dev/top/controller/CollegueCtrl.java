@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.top.entities.Collegue;
+import dev.top.entities.Formulaire;
 import dev.top.services.CollegueService;
 
 @CrossOrigin
@@ -42,4 +44,9 @@ public class CollegueCtrl {
 		return ResponseEntity.ok(collegueModifie);
 	}
 
+	@PostMapping("/nouveau")
+	public ResponseEntity<Collegue> requestCollegue(@RequestBody Formulaire form) {
+		Collegue newCollegue = this.collegueService.findByMatricule(form);
+		return ResponseEntity.ok(newCollegue);
+	}
 }

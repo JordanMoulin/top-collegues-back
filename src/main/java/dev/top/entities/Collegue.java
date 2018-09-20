@@ -20,13 +20,13 @@ public class Collegue {
 	private String email;
 	private String adresse;
 	private Integer score;
-	private String photoUrl;
+	private String photo;
 
 	public Collegue() {
 		super();
 	}
 
-	public Collegue(String pseudo, String nom, String prenom, String adresse, Integer score, String photoUrl) {
+	public Collegue(String pseudo, String nom, String prenom, String adresse, Integer score, String photo) {
 		super();
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -34,7 +34,7 @@ public class Collegue {
 		this.email = nom + "." + prenom + "@gmail.com";
 		this.adresse = adresse;
 		this.score = score;
-		this.photoUrl = photoUrl;
+		this.photo = photo;
 	}
 
 	public Integer getId() {
@@ -61,12 +61,12 @@ public class Collegue {
 		this.score = score;
 	}
 
-	public String getPhotoUrl() {
-		return photoUrl;
+	public String getPhoto() {
+		return photo;
 	}
 
-	public void setPhotoUrl(String photoUrl) {
-		this.photoUrl = photoUrl;
+	public void setPhotoUrl(String photo) {
+		this.photo = photo;
 	}
 
 	public String getPrenom() {
@@ -100,5 +100,4 @@ public class Collegue {
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
-
 }

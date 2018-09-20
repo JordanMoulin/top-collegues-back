@@ -3,9 +3,13 @@ package dev.top.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import dev.top.entities.Collegue;
+import dev.top.entities.Formulaire;
+import dev.top.exceptions.InvalidMatriculeException;
 import dev.top.exceptions.PseudoInvalideException;
 import dev.top.exceptions.ServiceException;
 import dev.top.repos.CollegueRepo;
@@ -14,6 +18,7 @@ import dev.top.repos.CollegueRepo;
 public class CollegueService {
 
 	private CollegueRepo collegueRepo;
+	private RestTemplate template = new RestTemplate();
 
 	/**
 	 * 
@@ -66,6 +71,32 @@ public class CollegueService {
 
 			return collegueTrouve;
 		}).orElseThrow(() -> new PseudoInvalideException());
+	}
 
+	public Collegue findByMatricule(Formulaire form) throws InvalidMatriculeException {
+		Collegue newCollegue;
+		String matricule = form.getMatricule();
+		Collegue[] collegue = template
+				.getForObject("http://collegues-api.cleverapps.io/collegues?matricule=" + matricule, Collegue[].class);
+		if (collegue.length == 0) {
+			throw new InvalidMatriculeException();
+		}
+		System.out.println(collegue[0]);
+		if (StringUtils.isBlank(form.getUrlImage())) {
+			newCollegue = new Collegue(form.getPseudo(), collegue[0].getNom(), collegue[0].getPrenom(),
+					collegue[0].getAdresse(), 0, collegue[0].getPhoto());
+		} else {
+			newCollegue = new Collegue(form.getPseudo(), collegue[0].getNom(), collegue[0].getPrenom(),
+					collegue[0].getAdresse(), 0, form.getUrlImage());
+		}
+		if (!collegueExiste(form.getPseudo())) {
+			this.collegueRepo.save(newCollegue);
+		}
+		return newCollegue;
+	}
+
+	public boolean collegueExiste(String pseudo) {
+		Optional<Collegue> collegue = this.collegueRepo.findByPseudo(pseudo);
+		return collegue.isPresent();
 	}
 }
